@@ -11,7 +11,8 @@
               type="text"
               id="email"
               class="form-control"
-              v-model="userData.email">
+              :value="userData.email"
+              @input="userData.email = $event.target.value">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
@@ -110,6 +111,11 @@
           </select>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <app-switch v-model="dataSwitch"></app-switch>
+        </div>
+      </div>
       <hr>
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
@@ -138,7 +144,7 @@
             <p>Gender: {{ gender }}</p>
             <p>Priority: {{ selectedPriority }}</p>
             <p>Выбрано: {{ selected }}</p>
-            <p>Switched:</p>
+            <p>Switched: {{ dataSwitch }}</p>
           </div>
         </div>
       </div>
@@ -147,6 +153,8 @@
 </template>
 
 <script>
+  import Switch from './Switch.vue'
+
   export default {
     data() {
       return {
@@ -165,8 +173,12 @@
           { text: 'One', value: 'A' },
           { text: 'Two', value: 'B' },
           { text: 'Three', value: 'C' }
-        ]
+        ],
+        dataSwitch: false
       }
+    },
+    components: {
+      appSwitch: Switch
     }
   }
 </script>
