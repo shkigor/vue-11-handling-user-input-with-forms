@@ -88,8 +88,25 @@
           <label for="priority">Priority</label>
           <select
             id="priority"
-            class="form-control">
-            <option></option>
+            class="form-control"
+            v-model="selectedPriority">
+            <option disabled value=""></option>
+            <option
+                   v-for="priority in priorities"
+                   :selected="priority == 'Medium'">{{ priority }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
+          <label for="guideSelect">Select with value</label>
+          <select
+            id="guideSelect"
+            class="form-control"
+            v-model="selected">
+            <option disabled value="">Выберите один из вариантов</option>
+            <option v-for="option in options"
+                    v-bind:value="option.value">{{ option.text }}</option>
           </select>
         </div>
       </div>
@@ -119,7 +136,8 @@
               <li v-for="item in sendMail">{{ item }}</li>
             </ul>
             <p>Gender: {{ gender }}</p>
-            <p>Priority:</p>
+            <p>Priority: {{ selectedPriority }}</p>
+            <p>Выбрано: {{ selected }}</p>
             <p>Switched:</p>
           </div>
         </div>
@@ -139,7 +157,15 @@
         },
         message: 'A new Text',
         sendMail: [],
-        gender: 'Male'
+        gender: 'Male',
+        priorities: ['High', 'Medium', 'Low'],
+        selectedPriority: 'High',
+        selected: '',
+        options: [
+          { text: 'One', value: 'A' },
+          { text: 'Two', value: 'B' },
+          { text: 'Three', value: 'C' }
+        ]
       }
     }
   }
